@@ -9,7 +9,6 @@ setup(
     version='0.0.1',
     description='DNS reconnaissance tool.',
     packages=["dns_recon"],
-    py_modules=["dns_recon"],
     package_dir={'dns_recon': 'dns_recon'},
     classifiers=[
         "Programming Language :: Python :: 3",
