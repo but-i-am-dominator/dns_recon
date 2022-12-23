@@ -1,7 +1,11 @@
 """Resolve DNS records."""
 
+import warnings
 import dns.resolver
 from dns.resolver import NXDOMAIN
+
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore", category=ImportWarning)
 
 class Resolv:
     """ Resolv DNS"""
@@ -33,8 +37,15 @@ class Resolv:
             print(f"Unexpected {err}, {type(err)}")
             return ("NONE", "NONE")
 
-
-
-
-test = Resolv.resolv_aaaa("sectigo69.com")
-print(test)
+    @staticmethod
+    def resolv_nameserver(domain, name_server='8.8.8.8'):
+        '''Resolve nameserver records.'''
+        resolver = dns.resolver.Resolver(configure=False)
+        resolver.nameservers = [name_server]
+        try:
+            answer = resolver.resolve(domain, "NS")
+            response = [str(NS)[:-1] for NS in answer.rrset]
+            return response
+        except NXDOMAIN as err:
+            print(f"Unexpected {err}, {type(err)}")
+            return ("NONE", "NONE")
