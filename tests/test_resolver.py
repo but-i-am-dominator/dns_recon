@@ -13,6 +13,11 @@ def test_resolv_aaaa():
     assert test == ('reddit.com.', '2a04:4e42:200::396')
 
 def test_resolv_ns():
-    '''Test resolv_aaaa static method.'''
+    '''Test resolv_ns static method.'''
     test = Resolv.resolv_nameserver("sectigo.com")
     assert 'ns1.as48447.net' in test
+
+def test_resolv_spf():
+    '''Test resolv_spf static method.'''
+    test = Resolv.resolv_spf("sectigo.com")
+    assert "spf" in test[0]
