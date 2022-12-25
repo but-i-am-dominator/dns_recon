@@ -21,3 +21,8 @@ def test_resolv_spf():
     '''Test resolv_spf static method.'''
     test = Resolv.resolv_spf("sectigo.com")
     assert "spf" in test[0]
+
+def test_resolv_txt():
+    '''Test resolv_spf static method.'''
+    test = Resolv.resolv_txt("sectigo.com")
+    assert "google" in test[0]

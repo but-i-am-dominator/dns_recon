@@ -62,3 +62,16 @@ class Resolv:
         except NXDOMAIN as err:
             print(f"Unexpected {err}, {type(err)}")
             return ("NONE", "NONE")
+
+    @staticmethod
+    def resolv_txt(domain, name_server='8.8.8.8'):
+        '''Resolve TXT records. Excluding SPF Records.'''
+        resolver = dns.resolver.Resolver(configure=False)
+        resolver.nameservers = [name_server]
+        try:
+            answer = resolver.resolve(domain, "TXT")
+            response = [str(SPF) for SPF in answer if "spf" not in str(SPF)]
+            return response
+        except NXDOMAIN as err:
+            print(f"Unexpected {err}, {type(err)}")
+            return ("NONE", "NONE")
