@@ -1,7 +1,7 @@
 "Pytest Module for Resolver"
 
-from dns_recon import Resolv
 import ipaddress
+from dns_recon import Resolv
 
 def test_resolv_a():
     '''Test resolv_a static method.'''
