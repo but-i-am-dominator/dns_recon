@@ -1,5 +1,6 @@
 "Pytest Module for Resolver"
 
+import ipaddress
 from dns_recon import Resolv
 
 def test_resolv_a():
@@ -10,7 +11,8 @@ def test_resolv_a():
 def test_resolv_aaaa():
     '''Test resolv_aaaa static method.'''
     test = Resolv.resolv_aaaa("reddit.com")
-    assert test == ('reddit.com.', '2a04:4e42:200::396')
+    ipv6 = ipaddress.ip_address(test[1])
+    assert ipv6.version == 6
 
 def test_resolv_ns():
     '''Test resolv_ns static method.'''
@@ -26,3 +28,8 @@ def test_resolv_txt():
     '''Test resolv_spf static method.'''
     test = Resolv.resolv_txt("sectigo.com")
     assert "google" in test[0]
+
+def test_resolv_soa():
+    '''Test resolv_soa static method.'''
+    test = Resolv.resolv_soa("sectigo.com")
+    assert "ns1.as48447.net" in test[0]

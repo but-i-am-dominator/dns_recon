@@ -75,3 +75,16 @@ class Resolv:
         except NXDOMAIN as err:
             print(f"Unexpected {err}, {type(err)}")
             return ("NONE", "NONE")
+
+    @staticmethod
+    def resolv_soa(domain, name_server='8.8.8.8'):
+        '''Resolve SOA records.'''
+        resolver = dns.resolver.Resolver(configure=False)
+        resolver.nameservers = [name_server]
+        try:
+            answer = resolver.resolve(domain, "SOA")
+            response = [str(SPF) for SPF in answer if "spf" not in str(SPF)]
+            return response
+        except NXDOMAIN as err:
+            print(f"Unexpected {err}, {type(err)}")
+            return ("NONE", "NONE")
