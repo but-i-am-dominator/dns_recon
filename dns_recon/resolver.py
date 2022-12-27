@@ -88,3 +88,16 @@ class Resolv:
         except NXDOMAIN as err:
             print(f"Unexpected {err}, {type(err)}")
             return ("NONE", "NONE")
+
+    @staticmethod
+    def resolv_dmarc(domain, name_server='8.8.8.8'):
+        '''Resolve DMARC records.'''
+        resolver = dns.resolver.Resolver(configure=False)
+        resolver.nameservers = [name_server]
+        try:
+            answer = resolver.resolve("_dmarc." + domain, "TXT")
+            response = [str(DMARC) for DMARC in answer]
+            return response
+        except NXDOMAIN as err:
+            print(f"Unexpected {err}, {type(err)}")
+            return ("NONE", "NONE")

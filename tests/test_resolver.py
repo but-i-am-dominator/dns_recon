@@ -33,3 +33,8 @@ def test_resolv_soa():
     '''Test resolv_soa static method.'''
     test = Resolv.resolv_soa("sectigo.com")
     assert "ns1.as48447.net" in test[0]
+
+def test_resolv_dmarc():
+    '''Test resolv_dmarc static method.'''
+    test = Resolv.resolv_dmarc("sectigo.com")
+    assert "DMARC" in test[0]
