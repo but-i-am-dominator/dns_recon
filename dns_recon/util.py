@@ -2,6 +2,7 @@
 
 import re
 import os
+import ipwhois
 
 class Utility:
     """ Utility methods."""
@@ -20,3 +21,9 @@ class Utility:
         '''Validate that SPF records do not contain +all.'''
         fail = "+all" in spf_record
         return fail
+
+    @staticmethod
+    def whois(ip_address):
+        '''Return dictionary with WHOIS information.'''
+        who = ipwhois.IPWhois(ip_address).lookup_whois()
+        return who
