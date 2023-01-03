@@ -2,6 +2,7 @@
 
 import warnings
 import dns.resolver
+import dns.reversename
 from dns.resolver import NXDOMAIN
 
 with warnings.catch_warnings():
@@ -98,6 +99,16 @@ class Resolv:
             answer = resolver.resolve("_dmarc." + domain, "TXT")
             response = [str(DMARC) for DMARC in answer]
             return response
+        except NXDOMAIN as err:
+            print(f"Unexpected {err}, {type(err)}")
+            return ("NONE", "NONE")
+
+    @staticmethod
+    def resolv_ptr(ip_addr):
+        '''Resolve PTR records.'''
+        try:
+            addr = dns.reversename.from_address(ip_addr)
+            return str(dns.resolver.resolve(addr, "PTR")[0])
         except NXDOMAIN as err:
             print(f"Unexpected {err}, {type(err)}")
             return ("NONE", "NONE")
