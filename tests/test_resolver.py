@@ -38,3 +38,8 @@ def test_resolv_dmarc():
     '''Test resolv_dmarc static method.'''
     test = Resolv.resolv_dmarc("sectigo.com")
     assert "DMARC" in test[0]
+
+def test_resolv_ptr():
+    '''Test resolv_ptr.'''
+    test = Resolv.resolv_ptr("151.139.128.10")
+    assert test == 'map3.hwcdn.net.'
