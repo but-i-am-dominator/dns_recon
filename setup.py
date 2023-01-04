@@ -18,7 +18,8 @@ setup(
         "Natural Language :: English"
     ],
     install_requires=[
-        "dnspython ~= 2.2.1"
+        "dnspython ~= 2.2.1",
+        "ipwhois ~= 1.2.0"
     ],
     extras_require = {
         "dev": [
