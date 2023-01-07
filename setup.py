@@ -19,7 +19,7 @@ setup(
     ],
     install_requires=[
         "dnspython ~= 2.0.0",
-        "ipwhois ~= 1.2.0"
+        "whois ~= 0.8.0"
     ],
     extras_require = {
         "dev": [

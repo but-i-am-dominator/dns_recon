@@ -18,4 +18,4 @@ def test_whois():
     '''Test whois static method.'''
     taget = "151.139.128.14"
     test = Utility.whois(taget)
-    assert test['asn_description'] == 'STACKPATH-CDN, US'
+    assert 'neteng@stackpath.com' in test['emails']
